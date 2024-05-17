@@ -1,0 +1,106 @@
+@if (member) {
+    <div class="row">
+        <div class="col-4">
+            <h1>Your profile</h1>
+        </div>
+        <div class="col-8">
+            @if (editForm.dirty) {
+                <div class="alert alert-info pb-0">
+                    <p><strong>Information: </strong>
+                        You have made changes. Any unsaved changes will be lost</p>
+                </div>
+            }
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <img 
+                    src="{{member.photoUrl || './assets/user.png'}}" 
+                    alt="{{member.knownAs}}"
+                    class="card-img img-thumbnail"
+                >
+                <div class="card-body">
+                    <div>
+                        <strong>Location:</strong>
+                        <p>{{member.city}}, {{member.country}}</p>
+                    </div>
+                    <div>
+                        <strong>Age:</strong>
+                        <p>{{member.age}}</p>
+                    </div>
+                    <div>
+                        <strong>Last Active:</strong>
+                        <p>{{member.lastActive}}</p>
+                    </div>
+                    <div>
+                        <strong>Member since:</strong>
+                        <p>{{member.created}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button 
+                        [disabled]="!editForm.dirty"
+                        form="editForm" type="submit" 
+                        class="btn btn-success col-12">
+                        Save changes
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <tabset class="member-tabset">
+                <tab heading="About {{member.knownAs}}">
+                    <form id="editForm" #editForm="ngForm" (ngSubmit)="updateMember()">
+                        <h4 class="mt-2">Description</h4>
+                        <textarea 
+                            class="form-control" 
+                            name="introduction" 
+                            [(ngModel)]="member.introduction"
+                            rows="6"
+                        >
+                        </textarea>
+                        <h4 class="mt-2">Looking for</h4>
+                        <textarea 
+                            class="form-control" 
+                            name="lookingFor" 
+                            [(ngModel)]="member.lookingFor"
+                            rows="6"
+                        >
+                        </textarea>
+                        <h4 class="mt-2">Interests</h4>
+                        <textarea 
+                            class="form-control" 
+                            name="interests" 
+                            [(ngModel)]="member.interests"
+                            rows="6"
+                        >
+                        </textarea>
+                        
+                        <h4 class="mt-2">Location Details</h4>
+                        <div class="d-flex align-items-center">
+                            <label>City: </label>
+                            <input type="text" 
+                                [(ngModel)]="member.city" 
+                                class="form-control mx-2"
+                                name="city"
+                            >
+                            <label>Country: </label>
+                            <input type="text" 
+                                [(ngModel)]="member.country" 
+                                class="form-control mx-2"
+                                name="country"
+                            >
+                        </div>
+
+                    </form>
+
+
+                </tab>
+                <tab heading="Edit photos">
+                    Photo edit will go here
+                </tab>
+            </tabset>
+        </div>
+
+    </div>
+}
