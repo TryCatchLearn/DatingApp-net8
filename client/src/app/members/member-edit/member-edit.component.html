@@ -13,8 +13,8 @@
         </div>
         <div class="col-4">
             <div class="card">
-                <img 
-                    src="{{member.photoUrl || './assets/user.png'}}" 
+                <img
+                    src="{{member.photoUrl || './assets/user.png'}}"
                     alt="{{member.knownAs}}"
                     class="card-img img-thumbnail"
                 >
@@ -37,9 +37,9 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button 
+                    <button
                         [disabled]="!editForm.dirty"
-                        form="editForm" type="submit" 
+                        form="editForm" type="submit"
                         class="btn btn-success col-12">
                         Save changes
                     </button>
@@ -52,41 +52,41 @@
                 <tab heading="About {{member.knownAs}}">
                     <form id="editForm" #editForm="ngForm" (ngSubmit)="updateMember()">
                         <h4 class="mt-2">Description</h4>
-                        <textarea 
-                            class="form-control" 
-                            name="introduction" 
+                        <textarea
+                            class="form-control"
+                            name="introduction"
                             [(ngModel)]="member.introduction"
                             rows="6"
                         >
                         </textarea>
                         <h4 class="mt-2">Looking for</h4>
-                        <textarea 
-                            class="form-control" 
-                            name="lookingFor" 
+                        <textarea
+                            class="form-control"
+                            name="lookingFor"
                             [(ngModel)]="member.lookingFor"
                             rows="6"
                         >
                         </textarea>
                         <h4 class="mt-2">Interests</h4>
-                        <textarea 
-                            class="form-control" 
-                            name="interests" 
+                        <textarea
+                            class="form-control"
+                            name="interests"
                             [(ngModel)]="member.interests"
                             rows="6"
                         >
                         </textarea>
-                        
+
                         <h4 class="mt-2">Location Details</h4>
                         <div class="d-flex align-items-center">
                             <label>City: </label>
-                            <input type="text" 
-                                [(ngModel)]="member.city" 
+                            <input type="text"
+                                [(ngModel)]="member.city"
                                 class="form-control mx-2"
                                 name="city"
                             >
                             <label>Country: </label>
-                            <input type="text" 
-                                [(ngModel)]="member.country" 
+                            <input type="text"
+                                [(ngModel)]="member.country"
                                 class="form-control mx-2"
                                 name="country"
                             >
@@ -97,7 +97,10 @@
 
                 </tab>
                 <tab heading="Edit photos">
-                    Photo edit will go here
+                    <app-photo-editor
+                      [member]="member"
+                      (memberChange)="onMemberChange($event)"
+                    ></app-photo-editor>
                 </tab>
             </tabset>
         </div>
