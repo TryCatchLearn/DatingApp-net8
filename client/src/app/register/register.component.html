@@ -1,29 +1,59 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+<form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
   <h2 class="text-center text-primary">Sign up</h2>
   <hr>
-  <div class="mb-3 form-floating">
-      <input 
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="model.username"
-          placeholder="Username"
-      >
-      <label>Username</label>
+
+  <div class="mb-3">
+    <label style="margin-right: 10px;">I am a: </label>
+    <label class="form-check-label">
+      <input type="radio" class="form-check-input" value="male" formControlName="gender"> Male
+    </label>
+    <label class="form-check-label">
+      <input type="radio" class="form-check-input" value="female" formControlName="gender"> Female
+    </label>
   </div>
 
-  <div class="mb-3 form-floating">
-      <input 
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="model.password"
-          placeholder="Password"
-      >
-      <label>Password</label>
-  </div>
+  <app-text-input [formControl]="$any(registerForm.controls['username'])" 
+    [label]="'Username'">
+  </app-text-input>
+
+  <app-text-input [formControl]="$any(registerForm.controls['knownAs'])" 
+  [label]="'Known as'">
+  </app-text-input>
+
+  <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])" 
+  [label]="'Date of birth'" [maxDate]="maxDate">
+  </app-date-picker>
+
+  <app-text-input [formControl]="$any(registerForm.controls['city'])" 
+  [label]="'City'">
+  </app-text-input>
+
+  <app-text-input [formControl]="$any(registerForm.controls['country'])" 
+  [label]="'Country'">
+  </app-text-input>
+
+  <app-text-input [formControl]="$any(registerForm.controls['password'])" 
+    [label]="'Password'"
+    [type]="'password'">
+  </app-text-input>
+
+  <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])" 
+    [label]="'Confirm password'"
+    [type]="'password'">
+  </app-text-input>
+
+  @if (validationErrors) {
+    <div class="alert alert-danger text-start">
+      <ul>
+        @for (error of validationErrors; track $index) {
+          <li>{{error}}</li>
+        }
+      </ul>
+    </div>
+  }
+
   <div class="form-group text-center">
-      <button class="btn btn-success me-2" type="submit">Register</button>
-      <button class="btn btn-default me-2" (click)="cancel()" type="button">Cancel</button>
+    <button [disabled]="!registerForm.valid" class="btn btn-success me-2" type="submit">Register</button>
+    <button class="btn btn-default me-2" (click)="cancel()" type="button">Cancel</button>
   </div>
 </form>
