@@ -5,7 +5,7 @@
             <div class="text-center">
                 <button 
                     class="btn btn-sm me-1"
-                    [disabled]="photo.isMain"
+                    [disabled]="photo.isMain || !photo.isApproved"
                     (click)="setMainPhoto(photo)"
                     [ngClass]="photo.isMain ? 'btn-success active' : 'btn-outline-success'"
                 >Main</button>

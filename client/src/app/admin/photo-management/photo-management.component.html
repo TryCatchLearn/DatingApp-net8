@@ -1,1 +1,21 @@
-<p>photo-management works!</p>
+<div class='row'>
+    @for (photo of photos; track photo.id) {
+        <div class='col-2 mb-1 img-wrapper'>
+            <h4>{{photo.username}}</h4>
+            <img src='{{photo.url}}' 
+                class='img-thumbnail p-1'
+                [class.not-approved]="!photo.isApproved" 
+                alt='{{photo.username}}'
+            >
+            @if (!photo.isApproved) {
+                <div class="text-center img-text">
+                    <span class="text-danger">Awaiting approval</span>
+                </div>
+            }
+            <div class='text-center'>
+                <button class='btn btn-sm btn-success me-1' (click)='approvePhoto(photo.id)'>Approve</button>
+                <button class='btn btn-sm btn-danger' (click)='rejectPhoto(photo.id)'>Reject</button>
+            </div>
+        </div>
+    }
+</div>
