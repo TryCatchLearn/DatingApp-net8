@@ -1,3 +1,26 @@
 .nv-file-over {
     border: dotted 3px red
 }
+
+.not-approved {
+    opacity: 0.2;
+}
+
+.img-wrapper {
+    position: relative
+}
+
+.img-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 30%;
+    text-align: center; 
+    word-wrap: break-word;
+    white-space: normal;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;   
+}
